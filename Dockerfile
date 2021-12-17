@@ -15,7 +15,7 @@ RUN yum -y update \
 
 RUN dnf -y update
     && dnf install httpd httpd-devel \
-    && dnf -y clean all \
+    && dnf -y clean all
     
 
 
