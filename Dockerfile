@@ -9,7 +9,7 @@ RUN yum -y update \
 
     && yum -y install wget \
     && wget https://download.opensuse.org/repositories/security://shibboleth/CentOS_7/security:shibboleth.repo -P /etc/yum.repos.d \
-    && yum -y install httpd httpd-devel shibboleth-3.1.0-3.1 mod_ssl \
+    && yum -y install httpd httpd-devel shibboleth-3.3.0 mod_ssl \
     && yum -y install dnf \
     && yum -y clean all
 
