@@ -1,24 +1,19 @@
 FROM rockylinux/rockylinux
  
 LABEL maintainer="Unicon, Inc."
-
+#get the latest repository from https://shibboleth.net/downloads/service-provider/RPMS/
 #Workaround since OpenSUSE's provo-mirror is not working properly
 #COPY security:shibboleth.repo /etc/yum.repos.d/security:shibboleth.repo
 
+COPY ./shibboleth.repo /etc/yum.repos.d/
 RUN yum -y update \
-
     && yum -y install wget \
-    && wget https://download.opensuse.org/repositories/security://shibboleth/CentOS_7/security:shibboleth.repo -P /etc/yum.repos.d \
-    && yum -y install httpd httpd-devel shibboleth-3.3.0 mod_ssl \
+    && yum -y install httpd httpd-devel shibboleth mod_ssl \
     && yum -y install dnf \
     && yum -y clean all
-
 RUN dnf -y update \
     && dnf -y install httpd httpd-devel \
     && dnf -y clean all
-    
-
-
 COPY httpd-shibd-foreground /usr/local/bin/
 COPY shibboleth/ /etc/shibboleth/
 
@@ -35,7 +30,6 @@ RUN test -d /var/run/lock || mkdir -p /var/run/lock \
     && sed -i 's/<\/VirtualHost>/ErrorLogFormat \"httpd-ssl-error [%{u}t] [%-m:%l] [pid %P:tid %T] %7F: %E: [client\\ %a] %M% ,\\ referer\\ %{Referer}i\"\n<\/VirtualHost>/g' /etc/httpd/conf.d/ssl.conf \
     && sed -i 's/CustomLog logs\/ssl_request_log/CustomLog \/dev\/stdout/g' /etc/httpd/conf.d/ssl.conf \
     && sed -i 's/TransferLog logs\/ssl_access_log/TransferLog \/dev\/stdout/g' /etc/httpd/conf.d/ssl.conf
-    
 EXPOSE 80 443
 
 CMD ["httpd-shibd-foreground"]
