@@ -3,16 +3,17 @@ FROM httpd:2.4
 
 LABEL maintainer="UIT"
 
-RUN apt update && apt -y upgrade
+RUN apt-get update && apt-get -y --no-install-recommends upgrade
 
 COPY httpd-shibd-foreground /usr/local/bin/
+COPY shibd /etc/logrotate.d/
+
 RUN chmod +x /usr/local/bin/httpd-shibd-foreground
 
-RUN apt install -y --no-install-recommends wget \
+RUN apt-get install -y --no-install-recommends wget \
+     curl \
      libapache2-mod-shib \
      shibboleth-sp-utils
-
-RUN apt update && apt -y upgrade && apt install -y --no-install-recommends libapache2-mod-shib shibboleth-sp-utils
 
 ## Clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
