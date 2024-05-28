@@ -15,7 +15,7 @@ RUN chmod +x /usr/local/bin/httpd-shibd-foreground
 
 RUN apt-get install -y --no-install-recommends wget \
      curl \
-     cron
+     cron \
      logrotate \
      libapache2-mod-shib \
      shibboleth-sp-utils
