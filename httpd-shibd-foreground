@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e 
 
+cp /etc/cron.daily/logrotate /etc/cron.hourly/logrotate
+
 /etc/init.d/cron start
 
 /etc/init.d/shibd start
