@@ -2,6 +2,8 @@
     daily
     missingok
     rotate 12
+    delaycompress
     compress
     notifempty
+    create 644 _shibd _shibd
 }

@@ -1,0 +1,10 @@
+/var/log/httpd/*.log {
+    daily
+    missingok
+    rotate 200
+    compress
+    delaycompress
+    size 20M
+    notifempty
+    create 644 root root
+}

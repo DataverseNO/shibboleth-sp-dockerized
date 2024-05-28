@@ -7,11 +7,16 @@ RUN apt-get update && apt-get -y --no-install-recommends upgrade
 
 COPY httpd-shibd-foreground /usr/local/bin/
 COPY shibd /etc/logrotate.d/
+COPY httpd /etc/logrotate.d/
+
+RUN cp /etc/cron.daily/logrotate /etc/cron.hourly/logrotate
 
 RUN chmod +x /usr/local/bin/httpd-shibd-foreground
 
 RUN apt-get install -y --no-install-recommends wget \
      curl \
+     cron
+     logrotate \
      libapache2-mod-shib \
      shibboleth-sp-utils
 
