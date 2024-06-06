@@ -3,11 +3,13 @@ set -e
 
 cp /etc/cron.daily/logrotate /etc/cron.hourly/logrotate
 
-/etc/init.d/cron start
+#/etc/init.d/cron start
 
 /etc/init.d/shibd start
 
-rm -f /usr/local/apache2/logs/httpd.pid 
+rm -f /usr/local/apache2/logs/httpd.pid
 
-exec httpd -DFOREGROUND "$@"
+/usr/local/apache2/bin/httpd -DFOREGROUND "$@"
+
+exec /etc/init.d/cron -f start 
 
