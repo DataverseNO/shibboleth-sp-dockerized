@@ -7,7 +7,6 @@ RUN apt-get update && apt-get -y --no-install-recommends upgrade
 
 COPY httpd-shibd-foreground /usr/local/bin/
 COPY shibd /etc/logrotate.d/
-# COPY httpd /etc/logrotate.d/
 
 RUN chmod +x /usr/local/bin/httpd-shibd-foreground
 
