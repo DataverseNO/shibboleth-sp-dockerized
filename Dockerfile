@@ -15,7 +15,8 @@ RUN apt-get install -y --no-install-recommends wget \
      cron \
      logrotate \
      libapache2-mod-shib \
-     shibboleth-sp-utils
+     shibboleth-sp-utils \
+     libapache2-mod-security2
 
 ## Clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
