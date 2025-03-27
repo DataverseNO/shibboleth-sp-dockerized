@@ -1,7 +1,9 @@
 #Dockerfile
-FROM httpd:2.4
+FROM docker.io/library/httpd:2.4
 
 LABEL maintainer="UIT"
+
+ENV SHIBBOLETH_SLEEP="0m"
 
 RUN apt-get update && apt-get -y --no-install-recommends upgrade
 
